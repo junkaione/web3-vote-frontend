@@ -2,7 +2,7 @@
   <van-form @submit="handleMandate">
     <van-cell-group inset>
       <van-field
-        v-model="owner"
+        v-model="host"
         name="主持人"
         label="主持人"
         placeholder="主持人"
@@ -28,10 +28,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { showSuccessToast } from "vant";
+import useEthers from "@/hooks/useEthers";
 
-const owner = ref("123");
+const contractRef = ref();
+
+const host = ref("");
 const mandateAddress = ref("");
 
-const handleMandate = () => {};
+const getHost = async () => {
+  const res = await contractRef.value.host();
+  host.value = res;
+};
+
+const handleMandate = async () => {
+  const mandateAddressArr = mandateAddress.value.split("\n");
+  const res = await contractRef.value.mandate(mandateAddressArr);
+  if (res) {
+    showSuccessToast("分发票权成功，等待区块链确认");
+  }
+};
+
+onMounted(async () => {
+  const { contract } = await useEthers();
+  contractRef.value = contract;
+  getHost();
+});
 </script>
