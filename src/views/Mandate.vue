@@ -3,10 +3,12 @@
     <van-cell-group inset>
       <van-field
         v-model="host"
+        type="textarea"
+        rows="2"
         name="主持人"
         label="主持人"
         placeholder="主持人"
-        disabled="true"
+        :disabled="true"
       />
       <van-field
         v-model="mandateAddress"

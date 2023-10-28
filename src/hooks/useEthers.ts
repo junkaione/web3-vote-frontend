@@ -9,7 +9,7 @@ const useEthers = async () => {
     abi,
   };
 
-  await provider.send("eth_requestAccounts", []);
+  const accounts = await provider.send("eth_requestAccounts", []);
   const signer = provider.getSigner();
 
   const contract = new ethers.Contract(
@@ -21,6 +21,7 @@ const useEthers = async () => {
   return {
     ethers,
     contract,
+    account: accounts[0],
   };
 };
 
