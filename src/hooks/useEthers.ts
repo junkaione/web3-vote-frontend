@@ -5,7 +5,7 @@ const useEthers = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const contractInfo = {
-    address: "0xc1da607dcCb4A98A045E795594634432404bA51b",
+    address: "0x5bB85117cCf0B989B6e7fcf8630ffdDC7603b38E",
     abi,
   };
 
