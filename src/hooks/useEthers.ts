@@ -1,6 +1,8 @@
 import { ethers } from "ethers";
 import { abi } from "@/contract/Vote_metadata.json";
 
+declare var window: any;
+
 const useEthers = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
